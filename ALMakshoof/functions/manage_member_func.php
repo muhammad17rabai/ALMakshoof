@@ -167,8 +167,8 @@ class Manage_member extends DB
     {
         $user_id = validation($_GET['user_id']);
         $sql = $this->connect()->query("SELECT * FROM users INNER JOIN devices ON devices.user_id = users.id WHERE user_id = $user_id ORDER BY devices.id DESC");
-        if ($sql->num_rows == 0) {
-            box_alert('secondary','لا يوجد أجهزة متصلة بهذا الحساب');
+        if($sql->num_rows == 0){
+            box_alert('danger','لا يوجد أجهزة مرتبطة بهذا الحساب');
         }
         while ($fetch=$sql->fetch_assoc()) {
     ?>

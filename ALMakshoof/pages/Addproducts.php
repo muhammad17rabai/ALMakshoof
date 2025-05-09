@@ -103,8 +103,7 @@ $cc = $check_sub->check_subscribe();
                             <div class="border p-10">
                                 <div class="form-group p-10">
                                     <label><b> الصورة الرئيسية للمنتج : </b> / <span class="text-info">اجباري</span></label>
-                                    <input type="file" class="form-control" name="main_img" id="bb" required style="display:none;">
-                                    <button type="button" class="bb">uploade</button>
+                                    <input type="file" class="form-control" name="main_img" required />
                                 </div><hr>
                                 <label><b>   صور أخرى للمنتج : </b></label>
                                 <div class="form-group form-add-screenshot p-10" id="form-add-screenshot">

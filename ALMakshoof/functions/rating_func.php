@@ -72,7 +72,7 @@ class Rating extends DB
                     <div class="review-wrapper clearfix">
                         <ul class="list-inline">
                             <li>
-                               <img src="<? echo $fetch['avatar'];?>" class="rounded-circle" width="35"> <span class="review-holder-name"><b><? echo $fetch['username'];?></b></span>&nbsp;<i class="review-date mr-1"><? get_date($fetch['date_created']);?></i>
+                               <img src="<? echo $fetch['avatar'];?>" class="rounded-circle" width="35" style="height:35px;"> <span class="review-holder-name"><b><? echo $fetch['username'];?></b></span>&nbsp;<i class="review-date mr-1"><? get_date($fetch['date_created']);?></i>
                             </li><br>
                             <li>
                                 <div class="rating">

@@ -64,26 +64,6 @@
         </div>
     </div>
     <!-------------------------------------- End details modal ---------------------------------------------->
-    <section class="stores-area stores-area-v1">
-        
-        <div class="page-pagination text-center mt-30 p-10 panel">
-            <nav>
-                <!-- Page Pagination -->
-                <ul class="page-pagination">
-                    <li><a class="page-numbers previous" href="#">السابق</a></li>
-                    <li><a href="#" class="page-numbers">1</a></li>
-                    <li><label class="page-numbers current">2</label></li>
-                    <li><a href="#" class="page-numbers">3</a></li>
-                    <li><a href="#" class="page-numbers">4</a></li>
-                    <li><label class="page-numbers dots">...</label></li>
-                    <li><a href="#" class="page-numbers">20</a></li>
-                    <li><a href="#" class="page-numbers next">التالي</a>
-                    </li>
-                </ul>
-                <!-- End Page Pagination -->
-            </nav>
-        </div>
-    </section>
 <!-- End Page Container -->
 </main>
 <!-- –––––––––––––––[ END PAGE CONTENT ]––––––––––––––– -->

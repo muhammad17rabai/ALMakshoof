@@ -43,7 +43,7 @@ class Messages extends DB
                     <a href="index.php?page=Chat&&message_id=<? echo $fetch['id'];?>" class="text-black">
                         <div class="row p-10">
                             <div class="col-xs-3 img-product text-center">
-                                <img src="<? echo $fetch['avatar'];?>" class="rounded-circle mb-10" width="100">
+                                <img src="<? echo $fetch['avatar'];?>" class="rounded-circle mb-10" width="100" style="height:65px;">
                                 <?
                                     if ($fetch['seen'] == 0) {
                                         echo '<i class="fa fa-circle"></i>';
@@ -94,7 +94,7 @@ class Messages extends DB
         while ($fetch = $sql->fetch_assoc()) {?>
             <div class="row form-add p-10 all-messages">
                 <div class="col-xs-3 text-center">
-                    <img src="<? echo $fetch['avatar'];?>" class="rounded-circle" width="100">
+                    <img src="<? echo $fetch['avatar'];?>" class="rounded-circle" width="100" style="height:65px;">
                 </div>
                 <div class="col-xs-9">
                     <div class="mt-15">
@@ -185,7 +185,7 @@ class Messages extends DB
                     if ($fetch['sender'] == $user_id) {?>
                         <div class="chat-message-left pb-3 m-5">
                             <div>
-                                <img src="<? echo $sql_user['avatar'];?>" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                <img src="<? echo $sql_user['avatar'];?>" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" style="height:40px;">
                                 <div class="text-muted small text-nowrap mt-2"><? echo date('h:i-a',strtotime($fetch['date_created']));?></div>
                             </div>
                             <div class="flex-shrink-1 rounded py-2 px-3 mr-3">
@@ -193,10 +193,10 @@ class Messages extends DB
                             </div>
                         </div>
                   <? }elseif($fetch['receiver'] == $user_id){
-                    $sql_user = $this->connect()->query("SELECT * FROM users WHERE role = '{$fetch['sender']}' ")->fetch_assoc();                         ?>
+                    $sql_user = $this->connect()->query("SELECT * FROM users WHERE role = '{$fetch['sender']}' ")->fetch_assoc();?>
                     <div class="chat-message-right pb-3 m-5">
                         <div>
-                            <img src="<? echo $sql_user['avatar'];?>" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                            <img src="<? echo $sql_user['avatar'];?>" class="rounded-circle mr-1" alt="Chris Wood" width="40" style="height:40px;">
                             <div class="text-muted small text-nowrap mt-2"><? echo date('h:i-a',strtotime($fetch['date_created']));?></div>
                         </div>
                         <div class="flex-shrink-1 rounded py-2 px-3 ml-3">
@@ -209,7 +209,7 @@ class Messages extends DB
                     if ($fetch['sender'] == 'admin') {?>
                         <div class="chat-message-left pb-3 m-5">
                             <div>
-                                <img src="<? echo $sql_user['avatar'];?>" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                <img src="<? echo $sql_user['avatar'];?>" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" style="height:40px;">
                                 <div class="text-muted small text-nowrap mt-2"><? echo date('h:i-a',strtotime($fetch['date_created']));?></div>
                             </div>
                             <div class="flex-shrink-1 rounded py-2 px-3 mr-3">
@@ -225,7 +225,7 @@ class Messages extends DB
                     $sql_user = $this->connect()->query("SELECT * FROM users WHERE id = '{$fetch['sender']}'")->fetch_assoc();?>
                     <div class="chat-message-right pb-3 m-5">
                         <div>
-                            <img src="<? echo $sql_user['avatar'];?>" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                            <img src="<? echo $sql_user['avatar'];?>" class="rounded-circle mr-1" alt="Chris Wood" width="40" style="height:40px;">
                             <div class="text-muted small text-nowrap mt-2"><? echo date('h:i-a',strtotime($fetch['date_created']));?></div>
                         </div>
                         <div class="flex-shrink-1 rounded py-1 px-3">

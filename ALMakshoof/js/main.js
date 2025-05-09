@@ -920,7 +920,3 @@ function generateAndStoreFingerprint() {
 var finger = generateAndStoreFingerprint();
 $('#finger').val(finger); // jQuery example, use `document.getElementById('finger').value = finger;` for vanilla JS
 
-
-$('.bb').click(function() {
-    document.getElementById('bb').click();
-})

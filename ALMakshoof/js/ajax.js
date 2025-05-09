@@ -145,28 +145,6 @@ $('.save_editmember').click(function(){
         })
     })
 })
-/********************* pages ***************************/
-$('.del_order').click(function(){
-    var id = $(this).attr('data-id');
-    var user_id = $(this).attr('data-userid');
-    var table = $(this).attr('data-t');
-    var img = $(this).attr('data-img');
-    var routs = $(this).attr('data-routs');
-    $.ajax({
-        url:"./functions/actions_func.php?action=delorder",
-        type:'POST',
-        cache:false,
-        data:{id:id,user_id:user_id,table:table,img:img},
-        dataType:"text",
-        success:function(data){
-            $("#result").html(data);
-            if($('#success').val() == "success"){
-                swals("تم حذف الطلب بنجاح")
-                setInterval(function () {location.href = "index.php?page="+routs}, 2000);
-            }
-        }
-    })
-})
 /********************* orders ***************************/
 $('.accept_order').click(function(){
     var id = $(this).attr('data-id');

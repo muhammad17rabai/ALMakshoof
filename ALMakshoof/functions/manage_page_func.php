@@ -258,7 +258,6 @@ class ManagePage extends DB
                                             echo '  
                                                 <div class="mt-15 order-btn">
                                                     <a href="index.php?page=Edit&&page_id='. $fetch['id'].'&&S=edit_page" class="btn-success btn-info"> تعديل </a>
-
                                                     <a href="#delete-order'.$fetch['id'].'" class="btn-danger" id="del_page" data-toggle="modal"> حذف </a>
                                                 </div>';
                                         }

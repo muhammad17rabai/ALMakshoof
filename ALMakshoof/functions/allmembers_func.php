@@ -35,7 +35,7 @@ class getmembers extends DB
                     <div class="col-md-4 col-sm-6 col-xs-12 p-20 list-member m-5">
                         <div class="row">
                             <div class="col-xs-3 img-member text-center">
-                                <img src="<? echo $getmember['avatar'];?>" class="img-circle mb-10" width="80"><br>
+                                <img src="<? echo $getmember['avatar'];?>" class="img-circle mb-10" width="80" style="height:65px;"><br>
                                 <?
                                     if ($getmember['active'] == 1) {
                                         if ($getmember['online'] == 1) {
@@ -252,7 +252,7 @@ class getmembers extends DB
                     <div class="col-md-4 col-sm-6 col-xs-12 p-20 list-member m-5">
                         <div class="row">
                             <div class="col-xs-3 img-member text-center">
-                                <img src="<? echo $getmember['avatar'];?>" class="img-circle" width="80">
+                                <img src="<? echo $getmember['avatar'];?>" class="img-circle" width="80" style="height:65px;">
                             </div>
                             <div class="col-xs-9 all-info">
                                 <div class="member-info">

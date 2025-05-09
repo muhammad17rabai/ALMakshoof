@@ -37,6 +37,9 @@ class ManageProducts extends DB
             $limit = 'ORDER BY id DESC';
         }
         $sql = $this->connect()->query("SELECT * FROM products WHERE status = 1 && active = 1 $limit");
+        if ($sql->num_rows == 0) {
+            box_alert('secondary','لا يوجد منتجات');
+        }
         while ($fetch = $sql->fetch_assoc()) {
         $sqlf = $this->connect()->query("SELECT * FROM favorate WHERE user_id ='{$_SESSION['id']}' && item_id ='{$fetch['id']}' && type ='product'");
         $rows = $sqlf->num_rows;

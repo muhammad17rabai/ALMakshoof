@@ -15,8 +15,7 @@
                         $code = rand(100000,999999);
                         if ($code > 0) {
                             $this->connect()->query("UPDATE users SET code = '$code' WHERE id = '$user_id'");
-                            //mail($email,'رمز الأمان الخاص بك هو',$code);
-                            /*
+                            mail($email,'رمز الأمان الخاص بك هو',$code);
                             error_reporting(-1);
                             ini_set('display_errors', 'On');
                             set_error_handler("var_dump");
@@ -44,7 +43,7 @@
                             else {
                                 echo 'error';
                             }
-                            */
+                            
                             header("location:index.php?page=Recover_password&&user_id=$user_id&&u=check_code");
                         }
                     }else{

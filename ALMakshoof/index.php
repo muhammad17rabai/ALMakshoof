@@ -152,7 +152,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>FRIDAY | Coupons, Deals, Discounts and Promo codes Template</title>
+    <title>ALMakshoof</title>
     <meta name="description" content="brief description here">
     <meta name="keywords" content="insert, keywords, here">
     <meta name="robots" content="index, follow">
@@ -231,21 +231,21 @@
     </div>
     <?
     if (isset($_SESSION['id'])) {?>
-    <div>
-        <div class="col-xs-3">
-            <a onclick="history.go(-1)">
-                <i class="fa fa-mail-forward text-secondary" style="font-size:25px"></i>
-            </a>
+        <div>
+            <div class="col-xs-3 mt-20">
+                <a onclick="history.go(-1)">
+                    <i class="fa fa-mail-forward text-secondary" style="font-size:25px"></i>
+                </a>
+            </div>
+            <div class="col-xs-6">
+                <img src="icons/logo2.png" height="200">
+            </div>
+            <div class="col-xs-3 mt-20">
+                <a onclick="history.go(+1)" style="float: left;">
+                    <i class="fa fa-mail-reply text-secondary" style="font-size:25px"></i>
+                </a>
+            </div>
         </div>
-        <div class="col-xs-6">
-            <img src="icons/logo2.png" height="200">
-        </div>
-        <div class="col-xs-3">
-            <a onclick="history.go(+1)" style="float: left;">
-                <i class="fa fa-mail-reply text-secondary" style="font-size:25px"></i>
-            </a>
-        </div>
-    </div>
     <?}?>
     <!--
     <div class="brand col-md-3 t-xs-center t-md-right valign-middle">
@@ -363,7 +363,7 @@
         </header>
         <!-- –––––––––––––––[ HEADER ]––––––––––––––– -->
         <!-- –––––––––––––––[ PAGE CONTENT ]––––––––––––––– -->
-        <div class="container main_content">
+        <div class="container">
             <div class="row">
                 <div class="mt-20 mr-10 ml-10 radius">
                     <? 
