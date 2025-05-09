@@ -228,6 +228,6 @@ switch ($_GET['action']) {
         $actions->edit_reject($t,$type);
         break;
     case 'delreject':
-        $actions->delete_reject($t,$type);
+        $actions->delete_reject();
         break;
 }
