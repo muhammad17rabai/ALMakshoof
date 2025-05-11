@@ -125,6 +125,16 @@ $count = new home;
                 </div>
             </a>
         </div>
+        <div class="col-xs-6">
+            <a href="index.php?page=Allbrokers" class="text-black">
+                <div class="customers card-home text-center">
+                    <h4><i class="fa fa-group text-info"></i></h4>
+                    <h6><b> الوسطاء </b></h6>
+                    <span><? echo $count->countbrokers(); ?></span>&nbsp;
+                    <i class="fa fa-arrow-left text-info"></i>
+                </div>
+            </a>
+        </div>
         <?}?>
     </div>
 </div><br><br>
