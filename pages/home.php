@@ -125,6 +125,7 @@ $count = new home;
                 </div>
             </a>
         </div>
+        <?}?>
         <div class="col-xs-6">
             <a href="index.php?page=Allbrokers" class="text-black">
                 <div class="customers card-home text-center">
@@ -135,6 +136,5 @@ $count = new home;
                 </div>
             </a>
         </div>
-        <?}?>
     </div>
 </div><br><br>
