@@ -158,7 +158,7 @@ class ManageProducts extends DB
                             <p class="date">تمت الاضافة : &nbsp;<label class="vote"><? get_date($fetch['date_created'])?></label> >> بواسطة :
                             <?
                                 if($role->r('role') == 2){
-                                    echo '<a href="index.php?page=Member_details&&user_id='.$fetch['id'].'&&p=member_info">'.$fetch['username'].'</a>';
+                                    echo '<a href="index.php?page=Member_details&&user_id='.$fetch['user_id'].'&&p=member_info">'.$fetch['username'].'</a>';
                                 }else{
                                     echo "<label class='vote'> ".$fetch['username']."</label>";
                                 }
