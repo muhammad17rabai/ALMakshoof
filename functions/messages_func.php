@@ -115,7 +115,14 @@ class Messages extends DB
     }
     function rows_m($message_id)
     {
-        $rows_message = $this->connect()->query("SELECT * FROM chat WHERE message_id = '$message_id'")->num_rows;
+        $role = new role;
+        $rows_contact = $this->connect()->query("SELECT * FROM contact WHERE seen = 0")->num_rows;
+        $rows_chat = $this->connect()->query("SELECT * FROM chat WHERE message_id = '$message_id'")->num_rows;
+        if($role->r('role') == 2){
+            $rows_message = $rows_contact + $rows_chat;
+        }else{
+            $rows_message = $rows_chat;
+        }
         return $rows_message;
 
     }
