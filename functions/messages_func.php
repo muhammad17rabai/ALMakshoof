@@ -115,14 +115,7 @@ class Messages extends DB
     }
     function rows_m($message_id)
     {
-        $role = new role;
-        $rows_contact = $this->connect()->query("SELECT * FROM contact WHERE seen = 0")->num_rows;
-        $rows_chat = $this->connect()->query("SELECT * FROM chat WHERE message_id = '$message_id'")->num_rows;
-        if($role->r('role') == 2){
-            $rows_message = $rows_contact + $rows_chat;
-        }else{
-            $rows_message = $rows_chat;
-        }
+        $rows_message = $this->connect()->query("SELECT * FROM chat WHERE message_id = '$message_id'")->num_rows;
         return $rows_message;
 
     }
@@ -250,11 +243,13 @@ class Messages extends DB
         $role = new role;
         $user_id = $_SESSION['id'];
         if ($role->r('role') == 2) {
-            $sql = $this->connect()->query("SELECT * FROM chat WHERE receiver = 'admin' && seen = 0 ORDER BY id DESC");
+            $sql_chat = $this->connect()->query("SELECT * FROM chat WHERE receiver = 'admin' && seen = 0 ORDER BY id DESC")->num_rows;
+            $sql_contact = $this->connect()->query("SELECT * FROM contact WHERE seen = 0 ORDER BY id DESC")->num_rows;
+            $rows = $sql_contact + $sql_chat;
         }else{
-            $sql = $this->connect()->query("SELECT * FROM chat WHERE receiver = '$user_id' && seen = 0 ORDER BY id DESC");
+            $sql_chat = $this->connect()->query("SELECT * FROM chat WHERE receiver = '$user_id' && seen = 0 ORDER BY id DESC")->num_rows;
+            $rows = $sql_chat;
         }
-        $rows = $sql->num_rows;
         if ($rows > 0) {
             if ($rows > 99) {
                 echo '99+';
