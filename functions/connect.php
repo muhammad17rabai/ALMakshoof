@@ -8,9 +8,9 @@ class DB {
         protected $db_name = 'u101161004_almakshoofs';
     */
         protected $db_host = 'localhost';
-        protected $db_user = 'root';
-        protected $db_pass = '12345678';
-        protected $db_name = 'almakshoof';
+        protected $db_user = 'u101161004_root';
+        protected $db_pass = '12345678@Almakshoof';
+        protected $db_name = 'u101161004_almakshoofs';
 	public function connect() {
 	
 		$connect_db = new mysqli( $this->db_host, $this->db_user, $this->db_pass, $this->db_name );
