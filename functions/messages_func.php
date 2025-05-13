@@ -138,7 +138,7 @@ class Messages extends DB
             $sql = $this->connect()->query("INSERT INTO chat(message_id,sender,receiver,body_chat,seen) 
             VALUES('$message_id','$sender','$receiver','$body',0)");
             if ($sql) {
-                $this->connect()->query("UPDATE contact SET date_created = '$date_updated', seen = 0 WHERE id = '$message_id'");
+                $this->connect()->query("UPDATE contact SET date_created = '$date_updated', seen = 1 WHERE id = '$message_id'");
                 echo '<input type="hidden" id="send_chat" value="success" />';
             }
         }
