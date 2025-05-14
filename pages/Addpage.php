@@ -106,9 +106,9 @@ $cc = $check_sub->check_subscribe();
                                 <label for="rating">  التقييم : </label>
                                 <div class="addrating">
                                     <input type="hidden" name="rating" id="rating" required>
-                                    <i class='bx bx-star star' style="--i: 0;" data-c="1"></i>
-                                    <i class='bx bx-star star' style="--i: 1;" data-c="2"></i>
-                                    <i class='bx bx-star star' style="--i: 2;" data-c="3"></i>
+                                    <i class='bx bxs-star star active-star' style="--i: 0;" data-c="3"></i>
+                                    <i class='bx bxs-star star active-star' style="--i: 1;" data-c="3"></i>
+                                    <i class='bx bxs-star star active-star' style="--i: 2;" data-c="3"></i>
                                     <i class='bx bx-star star' style="--i: 3;" data-c="4"></i>
                                     <i class='bx bx-star star' style="--i: 4;" data-c="5"></i>
                                 </div>
