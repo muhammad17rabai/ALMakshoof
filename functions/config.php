@@ -3,8 +3,8 @@
 
 return [
     'DB_HOST' => 'localhost',
-    'DB_USER' => 'root',
-    'DB_PASS' => '12345678',
-    'DB_NAME' => 'almakshoof',
+    'DB_USER' => 'u101161004_root',
+    'DB_PASS' => '12345678@Almakshoof',
+    'DB_NAME' => 'u101161004_almakshoof',
 ];
 ?>
