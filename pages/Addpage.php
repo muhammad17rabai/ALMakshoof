@@ -100,6 +100,9 @@ $cc = $check_sub->check_subscribe();
                             </div>
                             
                             <div class="form-group">
+                                <div class="alert alert-warning">
+                                    <span>التطبيق مخصص للصفحات ذات السمعة الجيدة لذلك يجب أن يكون تقييم الصفحة أكبر أو يساوي 3</span>
+                                </div>
                                 <label for="rating">  التقييم : </label>
                                 <div class="addrating">
                                     <input type="hidden" name="rating" id="rating" required>
