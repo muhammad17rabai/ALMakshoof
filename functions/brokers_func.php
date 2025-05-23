@@ -65,11 +65,24 @@ class Brokers extends DB
                     $sql_rate = $this->connect()->query("SELECT * FROM rating WHERE item_id = $item_id && type = 'broker'");
                     $n = 0;
                     $rows_rate = 0;
+                    $id =  $fetch['id'];
                     if ($sql_rate->num_rows > 0) {
                         while ($fetch_rate = $sql_rate->fetch_assoc()) {
                             $n = $n + $fetch_rate['rate'];
                         }
                         $rows_rate = ($n / $sql_rate->num_rows);
+                        if ($sql_rate->num_rows >= 5) {
+                            if ($rows_rate < 3) {
+                                $sql_update = $this->connect()->query("UPDATE brokers SET active = 0 WHERE id = '$id'");
+                                if ($sql_update) {
+                                    $m = new Notifications;
+                                    $m->save_notification($id,'admin',$item_id,'تم تعطيل صلاحية وساطة المتاجر العالمبة الخاصة بك بسبب حصولك على معدل تقييم أقل من 3 نجوم','secondary',3);
+                                    $date = time();
+                                    $notes = 'تم تعطيل صلاحية وساطة المتاجر العالمبة الخاصة بك بسبب حصولك على معدل تقييم أقل من 3 نجوم';
+                                    $sql_reject = $this->connect()->query("INSERT INTO order_notes(order_id,date_created,notes,status,type) VALUES('$id','$date','$notes',4,'broker')");
+                                }
+                            }
+                        }
                     }
                     $sqlf = $this->connect()->query("SELECT * FROM favorate WHERE user_id ='{$_SESSION['id']}' && item_id ='$item_id' && type ='broker'");
                     $rows = $sqlf->num_rows;
@@ -141,21 +154,25 @@ class Brokers extends DB
         $sql3 = $this->connect()->query("SELECT * FROM social INNER JOIN brokers ON social.broker_id = brokers.id WHERE brokers.user_id = '$user_id' ORDER BY social.id desc");
         $sql_rows = $this->connect()->query("SELECT r.* , u.username,avatar FROM rating AS r JOIN users AS u ON r.user_id = u.id WHERE r.item_id = $user_id && r.type = '$type' ORDER BY r.id DESC");
         $rows_rating = $sql_rows->num_rows;
-        switch ($fetch1['status']) {
-            case 0:
-                $msg = '<i class="fa fa-exchange"></i>&nbsp;<span class="text-info"><i> قيد المراجعة </i></span>';
-                break;
-            case 1:
-                $msg = '<i class="text-success"> تمت الموافقة <i class="fa fa-check"></i></i>';
-                break;
-            case 2:
-                $msg = '<a href="#show-result-pending'.$fetch1['id'].'" class="text-warning" data-toggle="modal" data-id='.$fetch1['id'].'><i class="fa fa-exclamation-triangle"></i>&nbsp;
-                        <span class="text-warning"><i> معلق </i></span></a>';
-                break;
-            case 3:
-                $msg = '<a href="#show-result-reject'.$fetch1['id'].'" class="text-danger" data-toggle="modal" data-id='.$fetch1['id'].'><i class="fa fa-close"></i>&nbsp;
-                        <span class="text-danger"><i>  مرفوض </i></span></a>';
-                break;
+        if ($fetch1['active'] == 0) {
+            $msg = '<i class="fa fa-close"></i>&nbsp;<span class="text-danger"><i> تم الغاء تنشيط وساطة المتاجر العالمية الخاصة بك لأن معدل تقييمك أقل من 3 نجوم</i></span>';
+        }else{
+            switch ($fetch1['status']) {
+                case 0:
+                    $msg = '<i class="fa fa-exchange"></i>&nbsp;<span class="text-info"><i> قيد المراجعة </i></span>';
+                    break;
+                case 1:
+                    $msg = '<i class="text-success"> تمت الموافقة <i class="fa fa-check"></i></i>';
+                    break;
+                case 2:
+                    $msg = '<a href="#show-result-pending'.$fetch1['id'].'" class="text-warning" data-toggle="modal" data-id='.$fetch1['id'].'><i class="fa fa-exclamation-triangle"></i>&nbsp;
+                            <span class="text-warning"><i> معلق </i></span></a>';
+                    break;
+                case 3:
+                    $msg = '<a href="#show-result-reject'.$fetch1['id'].'" class="text-danger" data-toggle="modal" data-id='.$fetch1['id'].'><i class="fa fa-close"></i>&nbsp;
+                            <span class="text-danger"><i>  مرفوض </i></span></a>';
+                    break;
+            }
         }
         if($rows > 0){?>
             <main>
@@ -389,7 +406,7 @@ class Brokers extends DB
         if (empty($val)) {
             if ($counts > 0) {
                 $sql = $this->connect()->query("INSERT INTO brokers(user_id,period,commission,whatsapp,date_created,status,active) 
-                VALUES('$user_id','$period','$commission','$whatsapp','$date',0,0)");
+                VALUES('$user_id','$period','$commission','$whatsapp','$date',0,1)");
                 if ($sql) {
                     $datee = time();
                     $lid = $this->connect()->query("SELECT MAX(id) as id FROM brokers WHERE user_id = $user_id")->fetch_assoc()['id'];
@@ -419,7 +436,7 @@ class Brokers extends DB
                 }
             }else{
                 $sql = $this->connect()->query("INSERT INTO brokers(user_id,period,commission,whatsapp,date_created,status,active) 
-                VALUES('$user_id','$period','$commission','$whatsapp','$date',0,0)");
+                VALUES('$user_id','$period','$commission','$whatsapp','$date',0,1)");
                 if ($sql) {
                     $datee = time();
                     $lid = $this->connect()->query("SELECT MAX(id) as id FROM brokers WHERE user_id = $user_id")->fetch_assoc()['id'];

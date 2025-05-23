@@ -59,6 +59,12 @@ class NoticDetails extends DB
         }
         ?>
         <div class="col-xs-12 p-10 mt-15 form-add">
+            <?
+                if ($fetch['status'] == 1 && $fetch['active'] == 0) {
+                    $msg = '<li><i class="fa fa-close"></i>&nbsp;</li><span class="text-danger"><i> تم الغاء النشر </i></span>';
+                    //box_alert('danger','تم الغاء نشر الصفحة ');
+                }
+            ?>
             <div id="result"></div>
             <div class="col-xs-12 text-center order-logo">
                 <img src="<? echo $fetch['logo'];?>">

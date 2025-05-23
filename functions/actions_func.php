@@ -81,7 +81,7 @@ class Actions extends DB
             box_alert('danger','يرجى ادخال سبب تعليق الطلب');
         }else{
             $sql = $this->connect()->query("INSERT INTO order_notes(order_id,date_created,notes,status,type) VALUES('$id','$date','$notes',0,'$type')");
-            $query = $this->connect()->query("UPDATE $table SET status = 2, active = 0 WHERE id = '$id'");
+            $query = $this->connect()->query("UPDATE $table SET status = 2, active = 1 WHERE id = '$id'");
             $m = new Notifications;
             $m->save_notification($id,'admin',$user_id,' عفوا ⚠️ تم تعليق طلبك ','success',$t);
 
@@ -154,7 +154,7 @@ class Actions extends DB
             box_alert('danger','يرجى ادخال سبب رفض الطلب');
         }else{
             $sql = $this->connect()->query("INSERT INTO order_notes(order_id,date_created,notes,status,type) VALUES('$id','$date','$notes',1,'$type')");
-            $query = $this->connect()->query("UPDATE $table SET status = 3, active = 0 WHERE id = '$id'");
+            $query = $this->connect()->query("UPDATE $table SET status = 3, active = 1 WHERE id = '$id'");
             $m = new Notifications;
             $m->save_notification($id,'admin',$user_id,' عذرا ❌ تم رفض طلبك ','success',$t);
 

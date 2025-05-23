@@ -87,6 +87,10 @@ class signin extends DB
             }else{
                 box_alert('danger',$val);
             }
+            if ($fetch_d['external_ip'] != $external_ip || $fetch_d['country'] != $country || $fetch_d['city'] != $city || $fetch_d['regoin'] != $region || $fetch_d['city_time'] != $city_time) {
+                $this->connect()->query("UPDATE devices SET external_ip='$external_ip', country='$country', city='$city', region='$region',
+                city_time='$city_time' WHERE user_id='$user_id' && finger='$finger' && active=1");
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ class ManagePage extends DB
         $rating = validation($_POST['rating']);
         $date_created = time();
         $status = 0;
-        $active = 0;
+        $active = 1;
         $sql = $this->connect()->query("SELECT * FROM pages WHERE page_url = '$pageurl' && active = 1");
         $rows_url = $sql->num_rows;
         $fetch_id = $sql->fetch_assoc()['id'];
@@ -26,7 +26,9 @@ class ManagePage extends DB
         $cc = count($imagename);
     
         if(isset($_POST['addpage'])){
-            //echo $imagename;
+            if ($rating < 3) {
+                $rating = 3;
+            }
             if(empty($val)){
                 if(empty($val_img)){
                     $sql = "INSERT INTO pages(user_id,page_name,page_url,category,description,logo,rate,date_created,status,active) 
@@ -74,6 +76,7 @@ class ManagePage extends DB
         $role = new role;
         $category = validation($_GET['category']);
         $type = validation($_GET['type']);
+        $page_active = validation($_GET['page_active']);
         switch ($type) {
             case 'facebook':
                 $tp = 'icons/face.png';
@@ -96,7 +99,7 @@ class ManagePage extends DB
                 echo '<div class="alert alert-success m-5">'.$text.'</div>';
                 $limit = 'LIMIT 3';
             }elseif($cc == 1){
-                $limit = 'ORDER BY p.id DESC';
+                $limit = 'ORDER BY p.date_updated DESC';
             }elseif($cc == 2){
                 $text = " تم تعليق طلب اشتراكك !! لتتمكن من رؤية جميع الصفحات الرجاء معالجة الطلب ".$url;
                 $limit = 'LIMIT 3';
@@ -111,19 +114,24 @@ class ManagePage extends DB
                 $limit = 'LIMIT 3';
             }
         }else{
-            $limit = 'ORDER BY p.id DESC';
+            $limit = 'ORDER BY p.date_updated DESC';
+        }
+        if ($page_active == "page_disable" && $role->r('role') == 2) {
+            $page_active = 0;
+        }else{
+            $page_active = 1;
         }
         if ($category == null || $category == 'all') {
             if ($type == null || $type == 'all') {
-                $sql = $this->connect()->query("SELECT p.* , u.username FROM pages AS p JOIN users AS u ON p.user_id = u.id WHERE p.status = 1 && p.active = 1 $limit");
+               $sql = $this->connect()->query("SELECT p.* , u.username FROM pages AS p JOIN users AS u ON p.user_id = u.id WHERE p.status = 1 && p.active = '$page_active' $limit");
             }else{
-                $sql = $this->connect()->query("SELECT p.* , u.username FROM pages AS p JOIN users AS u ON p.user_id = u.id WHERE p.logo = '$tp' && p.status = 1 && p.active = 1 $limit");
+                $sql = $this->connect()->query("SELECT p.* , u.username FROM pages AS p JOIN users AS u ON p.user_id = u.id WHERE p.logo = '$tp' && p.status = 1 && p.active = '$page_active' $limit");
             }
         }else{
             if ($type == null || $type == 'all') {
-                $sql = $this->connect()->query("SELECT p.* , u.username FROM pages AS p JOIN users AS u ON p.user_id = u.id WHERE p.category = '$category' && p.status = 1 && p.active = 1 $limit");
+                $sql = $this->connect()->query("SELECT p.* , u.username FROM pages AS p JOIN users AS u ON p.user_id = u.id WHERE p.category = '$category' && p.status = 1 && p.active = '$page_active' $limit");
             }else{
-                $sql = $this->connect()->query("SELECT p.* , u.username FROM pages AS p JOIN users AS u ON p.user_id = u.id WHERE p.category = '$category' && p.logo = '$tp' && p.status = 1 && p.active = 1 $limit");
+                $sql = $this->connect()->query("SELECT p.* , u.username FROM pages AS p JOIN users AS u ON p.user_id = u.id WHERE p.category = '$category' && p.logo = '$tp' && p.status = 1 && p.active = '$page_active' $limit");
             }
         }
         if ($sql->num_rows == 0) {
@@ -132,6 +140,27 @@ class ManagePage extends DB
         echo '<input type="hidden" id="countpage" value=" ( '.$sql->num_rows.' )"/>';
         while ($fetch = $sql->fetch_assoc()){
         $sqlimg = $this->connect()->query("SELECT * FROM page_images WHERE page_id = '{$fetch['id']}'");
+        $page_id = $fetch['id'];
+        $user_id = $fetch['user_id'];
+        $sql_rating = $this->connect()->query("SELECT * FROM rating WHERE item_id = '$page_id' && type='page'");
+        $rows_rating = $sql_rating->num_rows;
+        if ($rows_rating >= 5) {
+            $sum = 0;
+            while ($fetch_rating = $sql_rating->fetch_assoc()) {
+                $sum = $sum + $fetch_rating['rate'];
+            }
+            $avg = $sum / $rows_rating;
+            if ($avg < 3) {
+                $sql_update = $this->connect()->query("UPDATE pages SET active = 0 WHERE id = '$page_id'");
+                if ($sql_update) {
+                    $m = new Notifications;
+                    $m->save_notification($page_id,'admin',$user_id,'تم الغاء نشر الصفحة لأن معدل تقييم الصفحة أقل من 3 نجوم','secondary',0);
+                    $date = time();
+                    $notes = 'تم الغاء نشر الصفحة لأن معدل تقييم الصفحة أقل من 3 نجوم';
+                    $sql_reject = $this->connect()->query("INSERT INTO order_notes(order_id,date_created,notes,status,type) VALUES('$page_id','$date','$notes',4,'page')");
+                }
+            }
+        }
         switch ($fetch['rating']) {
             case 5:
                 $rating = ' <i class="text-success"> ممتازة </i>';

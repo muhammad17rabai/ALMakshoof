@@ -5,6 +5,7 @@ if(!isset($_SESSION['id'])){
 require_once './functions/manage_page_func.php';
 $category = validation($_GET['category']);
 $type = validation($_GET['type']);
+$page_active = validation($_GET['page_active']);
 $check_sub = new info;
 $cc = $check_sub->check_subscribe();
 $role = new role;
@@ -32,13 +33,32 @@ if ($type == null) {
             break;
     }
 }
+switch ($page_active) {
+    case 'page_disable':
+        $p = "الصفحات المعطلة";
+        break;
+    default:
+        $p = "الصفحات النشطة";
+        break;
+}
 ?>
 <!-- –––––––––––––––[ PAGE CONTENT ]––––––––––––––– -->
 <div id="mainContent" class="main-content">
     <div class="row pr-10 pl-10">
+        <?
+        if ($role->r('role') == 2) {?>
+            <div class="col-xs-12 d-flex justify-content-between install">
+                <label class="form-control bg-white text-st col-xs-8">  فلتر الحالة : </label>
+                <select class="form-control bg-white" id="page_active">
+                    <option value=" "><? echo $p ;?></option>
+                    <option value="page_active"> الصفحات النشطة </option>
+                    <option value="page_disable">  الصفحات المعطلة </option>
+                </select>
+            </div>
         <? 
+        }
         if ($cc == 1 || $role->r('role') == 2) {?>
-            <div class="col-xs-12 mt-15 d-flex justify-content-between">
+            <div class="col-xs-12 mt-5 d-flex justify-content-between">
                 <select id="type" class="form-control bg-white col-xs-5 mr-1" data-category="<? echo $category?>">
                     <option value="<? echo $_GET['type'];?>"><? echo $tp;?></option>
                     <option value="all"> الكل </option>

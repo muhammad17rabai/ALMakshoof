@@ -712,6 +712,10 @@ $('#type').on('change', function(){
     var tp = $(this).val();
     location.href = "index.php?page=Allpage&&category="+st+"&&type="+tp;
 })
+$('#page_active').on('change', function(){
+    var page_active = $(this).val();
+    location.href = "index.php?page=Allpage&&page_active="+page_active;
+})
 var countpage = $('#countpage').val();
 $('.count_category').html(countpage);
 /************************************ Modal zoom image ************************************* */

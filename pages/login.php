@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <a href="index.php?page=Recover_password" class="forgot-pass-link text-info">نسيت كلمة المرور؟</a>
                         </div>
-                        <button type="submit" class="btn btn-block btn-lg btn-info" name="login">تسجيل الدخول jjj</button>
+                        <button type="submit" class="btn btn-block btn-lg btn-info" name="login">تسجيل الدخول</button>
                     </form>
                 </div>
             </div>

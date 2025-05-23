@@ -32,25 +32,58 @@ class getmyposts extends DB
 {
     function getallpage()
     {
-        $sql = $this->connect()->query("SELECT * FROM pages WHERE status = 1 && active = 1 && user_id = '{$_SESSION['id']}' ORDER BY id DESC");
+        $sql = $this->connect()->query("SELECT * FROM pages WHERE status = 1 && user_id = '{$_SESSION['id']}' ORDER BY date_updated DESC");
         if($sql->num_rows == 0){
             box_alert('secondary',' لا يوجد لديك أي منشورات ');
         }
         while ($fetch = $sql->fetch_assoc()){
+        $page_id = $fetch['id'];
         $sqlimg = $this->connect()->query("SELECT * FROM page_images WHERE page_id = '{$fetch['id']}'");
         $rows = $this->connect()->query("SELECT * FROM favorate WHERE item_id ='{$fetch['id']}' && type ='page'")->num_rows;
-        switch ($fetch['status']) {
-            case 1:
-                $st = ' <i class="fa fa-check text-success"></i>&nbsp;<span class="text-success" style="font-size:13px;"> تم النشر </span>';
-                break;
-        }
-        ?>
+        if ($fetch['active'] == 1) {
+            $st = ' <i class="fa fa-check text-success"></i>&nbsp;<span class="text-success" style="font-size:13px;"> تم النشر </span>';
+        }else{
+            $st = ' <i class="fa fa-close text-danger"></i>&nbsp;<span class="text-danger" style="font-size:13px;"> تم الغاء النشر </span>';?>
+            <!-- Modal details -->
+            <div class="modal text-center" id="show-result-disable<? echo $page_id;?>" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content text-right">
+                        <div class="modal-header">
+                            <button type="button" class="clos" data-dismiss="modal" aria-hidden="true"><b>x</b></button>
+                            <h5>  سبب الغاء نشر الصفحة</h5>
+                        </div>
+                        <div class="container mt-5 mb-5">
+                            <div class="row">
+                                <div class="col-md-6 offset-md-3">
+                                    <ul class="timeline timeline-reject">
+                                        <?
+                                            $sql_notes = $this->connect()->query("SELECT * FROM order_notes WHERE order_id = $page_id && status = 4 && type = 'page' ORDER BY id DESC");
+                                            if ($sql_notes->num_rows == 0) {
+                                                echo '<li><h6>لا يوجد نتائج</h6></li><hr>';
+                                            }
+                                            while ($fetch_notes = $sql_notes->fetch_assoc()) {?>
+                                            <li>
+                                                <div class="show-reject-result<? echo $fetch_notes['id'];?>">
+                                                    <h6><a href="#" class="float-right"><? get_date($fetch_notes['date_created']);?></a></h6><br>
+                                                    <p><? echo $fetch_notes['notes'];?></p>
+                                                </div>
+                                            </li><hr>
+                                        <?}?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal details-->  
+        <?}?>
         <main>
             <div class="col-md-4 form-add card m-2 mt-5">
                 <div class="p-3">
                     <div class="d-flex flex-row mb-3"><img src="<? echo $fetch['logo'];?>" class="rounded-circle" width="90"  style="height:50px;">
                         <div class="d-flex flex-column mt-3"><a href="<? echo $fetch['page_url'];?>" target="blanek"><h5><? echo $fetch['page_name'];?></h5></a><span class="text-black-50"><? get_date($fetch['date_created']);?></span>
-                            <span style="font-size: 1.7rem;"><? show_rating($fetch['rate']); echo'&nbsp;&nbsp;'.$st; ?></span>
+                            <span style="font-size: 1.7rem;"><? show_rating($fetch['rate']);?></span>
+                            <a href="#show-result-disable<? echo $page_id;?>" data-toggle="modal"><? echo $st;?></a>
                         </div>
                     </div>
                     <h6><? echo substr($fetch['description'],0,150).' .......';?></h6><hr>
@@ -70,7 +103,6 @@ class getmyposts extends DB
         </main>
     <?    
         }
-
     }   
     function getallproducts()
     {
