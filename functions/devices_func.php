@@ -232,10 +232,11 @@ public  function get_country() {
     // Trim IP based on HTML formatting
     $pos = strpos( $file, '+3' ) + 3;
     $ip = substr( $file, $pos, strlen( $file ) );
-
+    
     // Trim IP based on HTML formatting
     $pos = strpos( $ip, '</' );
-    $external_ip = explode('/',substr( $ip, 0, $pos ));
+    $external_ip = explode('/',substr( $ip, 0, $pos ))[0];
+    
 // Output the IP address of your box
       $output = array(
           "city"           => 'unknown',
@@ -258,12 +259,12 @@ public  function get_country() {
 
       if (filter_var($ip, FILTER_VALIDATE_IP)) {
 
-        $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=188.161.116.50"));
+        $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=$external_ip"));
 
           if (@strlen(trim($ipdat->geoplugin_countryCode)) == 2) {
 
               $output = array(
-                  "external_ip"    =>$external_ip[0],
+                  "external_ip"    =>$external_ip,
                   "country"        => @$ipdat->geoplugin_countryName,
                   "city"           => @$ipdat->geoplugin_city,
                   "region"   => @$ipdat->geoplugin_regionName,
