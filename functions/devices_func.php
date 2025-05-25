@@ -258,7 +258,7 @@ public  function get_country() {
 
       if (filter_var($ip, FILTER_VALIDATE_IP)) {
 
-        $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip="));
+        $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=188.161.116.50"));
 
           if (@strlen(trim($ipdat->geoplugin_countryCode)) == 2) {
 
