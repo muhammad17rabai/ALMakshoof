@@ -89,7 +89,7 @@ class ManagePage extends DB
                 break;
         }
         if ($role->r('role') == 1) {
-            $url = '<a href="index.php?page=subscribe"> من هنا </a>';
+            $url = '<a href="index.php?page=newsubscribe"> من هنا </a>';
             if ($cc == 'not_exit') {
                 $text = "أنت غير مشترك !! لتتمكن من رؤية جميع الصفحات الرجاء الاشتراك".$url;
                 $limit = 'LIMIT 3';

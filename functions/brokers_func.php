@@ -21,7 +21,7 @@ class Brokers extends DB
         <?
         }
         if ($role->r('role') == 1) {
-            $url = '<a href="index.php?page=subscribe"> من هنا </a>';
+            $url = '<a href="index.php?page=newsubscribe"> من هنا </a>';
             if ($cc == 'not_exit') {
                 $text = "أنت غير مشترك !! لتتمكن من رؤية جميع الوسطاء الرجاء الاشتراك".$url;
                 echo '<div class="alert alert-danger m-5 mt-20">'.$text.'</div>';
@@ -730,7 +730,7 @@ class Brokers extends DB
         <?
         if ($rows > 0) {
             if ($role->r('role') == 1) {
-                $url = '<a href="index.php?page=subscribe"> من هنا </a>';
+                $url = '<a href="index.php?page=newsubscribe"> من هنا </a>';
                 if ($cc == 'not_exit') {
                     $text = "أنت غير مشترك !! لتتمكن من رؤية الوسطاء لهذا الموقع الرجاء الاشتراك".$url;
                     echo '<div class="alert alert-danger m-5 mt-20">'.$text.'</div>';
