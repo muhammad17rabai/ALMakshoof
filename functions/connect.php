@@ -1,12 +1,11 @@
 <?php
 // DB.class.php
 class DB {
+    protected $db_host = 'localhost';
+    protected $db_user = 'u101161004_root';
+    protected $db_pass = '12345678@Almakshoof';
+    protected $db_name = 'u101161004_almakshoofs';
     /*
-        protected $db_host = 'localhost';
-        protected $db_user = 'u101161004_root';
-        protected $db_pass = '12345678@Almakshoof';
-        protected $db_name = 'u101161004_almakshoofs';
-    */
     protected $db_host;
     protected $db_user;
     protected $db_pass;
@@ -19,6 +18,7 @@ class DB {
         $this->db_pass = $config['DB_PASS'];
         $this->db_name = $config['DB_NAME'];
     }
+    */
 	public function connect() {
 	
 		$connect_db = new mysqli( $this->db_host, $this->db_user, $this->db_pass, $this->db_name );
