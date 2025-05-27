@@ -361,7 +361,7 @@
                                     <select name="edit_payment_method" id="payment_method" class="form-control">
                                         <option value="<? echo $fetch['pay_method'];?>"> <? echo $pay;?></option>
                                         <!--<option value="bop"> بنك فلسطين </option>-->
-                                        <option value="jawwal"> جوال باي </option>
+                                        <!--<option value="jawwal"> جوال باي </option>-->
                                         <option value="reflect"> ريفلكت </option>
                                         <option value="iburaq"> ايبان (IBURAQ) </option>
                                     </select>
