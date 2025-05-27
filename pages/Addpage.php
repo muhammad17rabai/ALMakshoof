@@ -23,6 +23,7 @@ $cc = $check_sub->check_subscribe();
         </ul>
     </div>
     <?
+    /*
         if ($role->r('role') == 1) {
             $url = '<a href="index.php?page=subscribe"> من هنا </a>';
             if ($cc == 'not_exit') {
@@ -44,7 +45,8 @@ $cc = $check_sub->check_subscribe();
         }else{
             $cc = 1;
         }
-        if ($cc == 1) {?>
+        if ($cc == 1) {
+        */?>
         <!-- Page Container -->
         <div class="page-container">
             <div class="container">
@@ -127,6 +129,6 @@ $cc = $check_sub->check_subscribe();
             </div>
         </div>
         <!-- End Page Container -->
-    <?}?>
+    <?//}?>
 </main>
 <!-- –––––––––––––––[ END PAGE CONTENT ]––––––––––––––– -->
