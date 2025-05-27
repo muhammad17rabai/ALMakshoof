@@ -15,13 +15,11 @@ class DB {
             $this->db_user = $config['DB_USER'];
             $this->db_pass = $config['DB_PASS'];
             $this->db_name = $config['DB_NAME'];
-            echo 'tt';
         } else {
             $this->db_host = 'localhost';
             $this->db_user = 'u101161004_root';
             $this->db_pass = '12345678@Almakshoof';
             $this->db_name = 'u101161004_almakshoofs';
-            echo 'ff';
         }
     }
 
