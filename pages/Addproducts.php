@@ -22,7 +22,7 @@ $cc = $check_sub->check_subscribe();
             </li>
         </ul>
     </div>
-    <?
+    <?php
     /*
         if ($role->r('role') == 1) {
             $url = '<a href="index.php?page=subscribe"> من هنا </a>';
