@@ -235,8 +235,6 @@ public  function get_country() {
     
     // Trim IP based on HTML formatting
     $pos = strpos( $ip, '</' );
-<<<<<<< HEAD
-
     function getUserIP() {
         $ip = '';
     
@@ -255,9 +253,6 @@ public  function get_country() {
     }
     //$external_ip = explode('/',substr( $ip, 0, $pos ))[0];
     $external_ip =  getUserIP();
-=======
-    $external_ip = explode('/',substr( $ip, 0, $pos ))[0];
->>>>>>> 59c534d37b6913ec336867cf6808de8e215e3e08
     
 // Output the IP address of your box
       $output = array(
