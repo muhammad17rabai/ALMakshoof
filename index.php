@@ -3,8 +3,10 @@
     session_start();
     if (file_exists('functions/config.php')) {
         require_once 'functions/config.php';
+        echo 'tt';
     }else{
         require_once 'functions/connect.php';
+        echo 'ff';
     }
     require_once 'functions/functions.php';
     require_once 'functions/notifications_func.php';
