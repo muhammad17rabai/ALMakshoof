@@ -1,9 +1,5 @@
 <?
-if (file_exists('config.php')) {
-    require_once 'config.php';
-}else{
-    require_once 'connect.php';
-}
+require_once 'connect.php';
 class Notifications extends DB
 {
     /*

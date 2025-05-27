@@ -1,9 +1,5 @@
 <?
-if (file_exists('functions/config.php')) {
-        require_once 'functions/config.php';
-    }else{
-        require_once 'functions/connect.php';
-    }
+require_once 'connect.php';
 require_once 'functions.php';
 require_once 'notifications_func.php';
 class Actions extends DB

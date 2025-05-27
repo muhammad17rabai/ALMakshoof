@@ -1,11 +1,7 @@
 <?php
     ob_start();
     session_start();
-    if (file_exists('functions/config.php')) {
-        require_once 'functions/config.php';
-    }else{
-        require_once 'functions/connect.php';
-    }
+    require_once 'functions/connect.php';
     require_once 'functions/functions.php';
     require_once 'functions/notifications_func.php';
     require_once 'functions/messages_func.php';
