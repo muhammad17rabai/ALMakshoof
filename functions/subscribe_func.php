@@ -53,7 +53,7 @@
                                                 <select name="payment_method" id="payment_method" class="form-control">
                                                     <option value=""> اختار طريقة الدفع </option>
                                                     <!--<option value="bop"> بنك فلسطين </option>-->
-                                                    <option value="jawwal"> جوال باي </option>
+                                                    <!--<option value="jawwal"> جوال باي </option>-->
                                                     <option value="reflect"> ريفلكت </option>
                                                     <option value="iburaq"> ايبان (IBURAQ) </option>
                                                 </select>
@@ -91,10 +91,10 @@
                                                     <div class="col-xs-3 bb text-center form-group">
                                                         <img src="./icons/bop.png" width="60">
                                                     </div>
-                                                -->
                                                 <div class="col-xs-4 bb text-center form-group">
                                                     <img src="./icons/jawwal.png" width="30">
                                                 </div>
+                                                -->
                                                 <div class="col-xs-4 bb text-center form-group">
                                                     <img src="./icons/reflect.png" width="27">
                                                 </div>
