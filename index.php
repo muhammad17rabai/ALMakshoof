@@ -1,7 +1,7 @@
 <?php
     ob_start();
     session_start();
-    if (file_exists(__DIR__ . 'functions/config.php')) {
+    if (file_exists('functions/config.php')) {
         require_once 'functions/config.php';
     }else{
         require_once 'functions/connect.php';
