@@ -232,10 +232,29 @@ public  function get_country() {
     // Trim IP based on HTML formatting
     $pos = strpos( $file, '+3' ) + 3;
     $ip = substr( $file, $pos, strlen( $file ) );
-
+    
     // Trim IP based on HTML formatting
     $pos = strpos( $ip, '</' );
-    $external_ip = explode('/',substr( $ip, 0, $pos ));
+
+    function getUserIP() {
+        $ip = '';
+    
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            // IP من خلال proxy
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            // IP من خلال proxy أو load balancer
+            $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0]; // أحيانًا يحتوي على أكثر من IP
+        } else {
+            // IP الحقيقي
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+    
+        return trim($ip);
+    }
+    //$external_ip = explode('/',substr( $ip, 0, $pos ))[0];
+    $external_ip =  getUserIP();
+    
 // Output the IP address of your box
       $output = array(
           "city"           => 'unknown',
@@ -263,7 +282,7 @@ public  function get_country() {
           if (@strlen(trim($ipdat->geoplugin_countryCode)) == 2) {
 
               $output = array(
-                  "external_ip"    =>$external_ip[0],
+                  "external_ip"    =>$external_ip,
                   "country"        => @$ipdat->geoplugin_countryName,
                   "city"           => @$ipdat->geoplugin_city,
                   "region"   => @$ipdat->geoplugin_regionName,

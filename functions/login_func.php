@@ -31,6 +31,7 @@ class signin extends DB
             $hieght = $get_country['hieght'];
             $date_created = time();
             $date_updated = time();
+            //echo 'ep = '.$external_ip;
         /**************************************** end device info *************************************************/
         $sql_d = $this->connect()->query("SELECT * FROM devices WHERE user_id = '$user_id' && active=1");
         $rows_d = $sql_d->num_rows;
