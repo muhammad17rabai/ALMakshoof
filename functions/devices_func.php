@@ -232,10 +232,33 @@ public  function get_country() {
     // Trim IP based on HTML formatting
     $pos = strpos( $file, '+3' ) + 3;
     $ip = substr( $file, $pos, strlen( $file ) );
-
+    
     // Trim IP based on HTML formatting
     $pos = strpos( $ip, '</' );
-    $external_ip = explode('/',substr( $ip, 0, $pos ));
+<<<<<<< HEAD
+
+    function getUserIP() {
+        $ip = '';
+    
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            // IP من خلال proxy
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            // IP من خلال proxy أو load balancer
+            $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0]; // أحيانًا يحتوي على أكثر من IP
+        } else {
+            // IP الحقيقي
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+    
+        return trim($ip);
+    }
+    //$external_ip = explode('/',substr( $ip, 0, $pos ))[0];
+    $external_ip =  getUserIP();
+=======
+    $external_ip = explode('/',substr( $ip, 0, $pos ))[0];
+>>>>>>> 59c534d37b6913ec336867cf6808de8e215e3e08
+    
 // Output the IP address of your box
       $output = array(
           "city"           => 'unknown',
@@ -258,12 +281,12 @@ public  function get_country() {
 
       if (filter_var($ip, FILTER_VALIDATE_IP)) {
 
-        $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip="));
+        $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=$external_ip"));
 
           if (@strlen(trim($ipdat->geoplugin_countryCode)) == 2) {
 
               $output = array(
-                  "external_ip"    =>$external_ip[0],
+                  "external_ip"    =>$external_ip,
                   "country"        => @$ipdat->geoplugin_countryName,
                   "city"           => @$ipdat->geoplugin_city,
                   "region"   => @$ipdat->geoplugin_regionName,
