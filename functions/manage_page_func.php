@@ -1,5 +1,9 @@
 <?php
-require_once 'connect.php';
+if (file_exists('config.php')) {
+    require_once 'config.php';
+}else{
+    require_once 'connect.php';
+}
 require_once 'functions.php';
 require_once 'notifications_func.php';
 class ManagePage extends DB
