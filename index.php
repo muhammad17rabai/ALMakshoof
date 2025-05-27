@@ -1,7 +1,7 @@
 <?php
     ob_start();
     session_start();
-    require_once 'functions/connect.php';
+    require_once 'functions/connect.local.php';
     require_once 'functions/functions.php';
     require_once 'functions/notifications_func.php';
     require_once 'functions/messages_func.php';
