@@ -68,7 +68,7 @@
                         </div>
                         <div class="custom-checkbox mb-20">
                             <input type="checkbox" id="agree_terms" name="agree_terms" required>
-                            <label class="color-mid" for="agree_terms">أنا أوافق على <a href="terms_conditions.html" class="text-info">تعليمات الاستخدام</a> و <a href="terms_conditions.html" class="text-info">بيان الخصوصية</a>.</label>
+                            <label class="color-mid" for="agree_terms">أنا أوافق على <a href="index.php?page=Polices_terms" class="text-info"> تعليمات الاستخدام و شروط الخصوصية </a></a>.</label>
                         </div>
                         <button type="submit" class="btn btn-block btn-lg btn-info" name="create_user"> انشاء حساب </button>
                     </form>
